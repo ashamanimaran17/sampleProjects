@@ -68,3 +68,5 @@ to build both fronend and backend simultaneously
 in terminal npm run-script dev
 
 mongodb atlas cn be accessed in https://cloud.mongodb.com/
+
+npm install mongoose dotenv --save

@@ -11,6 +11,7 @@
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "start": "nodemon server/index.js",
+    "server": "node server/index.js",
     "dev": "concurrently  \"npm run serve\" \"npm run start\""
   },
   "keywords": [],
@@ -22,6 +23,7 @@
     "classnames": "^2.3.1",
     "classnames-loader": "^2.1.0",
     "concurrently": "^6.2.1",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.13.7",
     "react": "^17.0.2",

@@ -20,6 +20,9 @@ const config = {
     inline: true,
     writeToDisk: true
   },
+  resolve: {
+    extensions: ['','.js', '.jsx']
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html",

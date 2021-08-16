@@ -7,7 +7,7 @@ router.route('/').get((req, res)=> {
     .catch((err)=> {res.status(400).json('Error' + err)});
 })
 router.route('/add').post((req, res)=> {
-    const event = req.body.event;
+   /*  const event = req.body.event;
     const ticket = req.body.ticket;
     const date = req.body.date;
     const price = req.body.price;
@@ -16,9 +16,13 @@ router.route('/add').post((req, res)=> {
         "ticket": ticket,
         "date": date,
         "price": price
-    });
+    }); */
+    const newTicketEvent = new TicketEvent(req.body);
     newTicketEvent.save()
-    .then(( )=> res.json('Event added'))
-    .catch((err)=> {res.status(400).json('Error' + err)});
+    .then(( )=> {
+    res.json('Event added')}
+    ).catch((err)=> {
+        res.status(400).json('Error' + err)
+    });
 })
 module.exports = router;

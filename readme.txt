@@ -70,3 +70,18 @@ in terminal npm run-script dev
 mongodb atlas cn be accessed in https://cloud.mongodb.com/
 
 npm install mongoose dotenv --save
+
+to debug 
+npm run start
+add debug configuration attach to process
+
+to resolve modules with shorter path, in .baberc add a config for module-resolver in plugin section
+npm install --save-dev babel-plugin-module-resolver 
+
+to implicity resolve .jsx file extensions in webpack.config.js
+resolve: {
+    extensions: ['','.js', '.jsx']
+  },
+
+add routing
+npm install "react-router-dom" --save  

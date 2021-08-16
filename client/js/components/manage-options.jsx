@@ -24,8 +24,8 @@ class ManageOptionsTabNoWrap extends Component {
     render() {
         return (
             <Toolbar className={cx("navButton")}>
-            <Button  to="/ticketManager" component={Link} className={cx("navButton")} color={this.state.selected === "/ticketManager" ? "primary" : ""}>Buy Tickets</Button>
-            <Button  to="/eventManager" component={Link} className={cx("navButton")} color={this.state.selected === "/eventManager" ? "primary" : ""}>Manage Events</Button>
+            <Button  to="/ticketManager" component={Link} className={cx("navButton")} color={this.state.selected === "/ticketManager" ? "primary" : "default"}>Buy Tickets</Button>
+            <Button  to="/eventManager" component={Link} className={cx("navButton")} color={this.state.selected === "/eventManager" ? "primary" : "default"}>Manage Events</Button>
             </Toolbar>
         );
     }

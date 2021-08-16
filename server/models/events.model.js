@@ -2,9 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.
 Schema;
 const eventSchema= new Schema({
-    event: {type: String,required: true,unique: true,trim: true,minlength:3},
-    tickets:[{ticket:{type: String,required: true,trim: true,minlength:3},price:{type:Number, required: true} }],
-    date:{type:Date, required: true}
+    eventName: {type: String,required: true,unique: true,trim: true},
+    tickets:[
+        {type:{type: String,required: true,trim: true},
+        price:{type:Number, required: true},
+        maxCount:{type:Number, required: true},
+        sold:{type:Number, required: true} }
+    ],
+    startDate:{type:Date, required: true},
+    endDate:{type:Date, required: true}
 }, {
     timestamps: true
 })

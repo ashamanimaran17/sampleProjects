@@ -84,4 +84,23 @@ resolve: {
   },
 
 add routing
-npm install "react-router-dom" --save  
+npm install "react-router-dom" --save
+
+to use withStyles
+npm install @material-ui/styles --save
+
+npm install moment --save
+
+to enable eslint
+npm install eslint -D
+eslint does not support es6 syntax
+so use
+npm install babel-eslint -D
+in eslint.rc
+module.exports = {
+  parser: "babel-eslint",
+};
+npm install --save prop-types
+
+for api calls
+npm install axios --save

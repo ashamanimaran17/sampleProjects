@@ -16,6 +16,12 @@ class SideNavNoWrap extends Component {
         this.props.handleEventSelect(value);
     }
     componentDidMount(){
+        this.getData();
+    }
+    update = () => {
+        this.getData();
+    }
+    getData = () => {
         axios({
             method: "GET",
             url:"/events/get",

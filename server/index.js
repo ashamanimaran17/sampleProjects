@@ -20,6 +20,7 @@ connection.once('open', ()=> {
 }); */
 //react
 app.use(express.static(path.join(appRoot, "dist")));
+app.use(express.static('public'))
 
 //server will be sending and receiving json
 app.use(express.json());

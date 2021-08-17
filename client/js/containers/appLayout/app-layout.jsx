@@ -16,9 +16,13 @@ class AppLayoutNoWrap extends Component{
         this.state={
             eventName: ""
         }
+        this.sideNavRef= React.createRef();
     }
     onHandleEventSelect=(eventName)=>{
        this.props.onEventSelected(eventName)
+    }
+    onHandleDataUpdate = () => {
+        this.sideNavRef.current.update();
     }
 render(){
     return(
@@ -26,13 +30,13 @@ render(){
             <AppHeader/>
             <Grid container style={{minHeight: "100vh"}}>
                 <Grid item xs={3} >
-                <SideNav handleEventSelect={this.onHandleEventSelect}></SideNav>
+                <SideNav handleEventSelect={this.onHandleEventSelect} ref={this.sideNavRef}></SideNav>
                 </Grid>
                 <Grid item xs={9}>
                 <ManageOptionsTab/>
                 <Switch>
                 <Route path="/ticketManager" ><TicketManager key={uuidv1()}/></Route>
-                <Route path="/eventManager" ><EventManager key={uuidv1()}/></Route>
+                <Route path="/eventManager" ><EventManager key={uuidv1()} handleDataUpdate={this.onHandleDataUpdate}/></Route>
                 <Route exact path="/" component={Home} />
                 </Switch>
                 </Grid>

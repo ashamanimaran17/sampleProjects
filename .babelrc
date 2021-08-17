@@ -1,5 +1,19 @@
 {
-    "plugins": ["@babel/syntax-dynamic-import"],
+    "plugins": [["@babel/syntax-dynamic-import"],
+        [
+            "module-resolver",
+            {
+                "root":["."],
+                "alias": {
+                    "components": "./client/js/components",
+                    "containers": "./client/js/containers",
+                    "assets": "./client/assets",
+                    "css":"./client/css"
+                }
+            }
+        ]
+
+],
     "presets": [
         [
             "@babel/preset-env",

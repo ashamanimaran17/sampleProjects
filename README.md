@@ -2,14 +2,12 @@
 
 This project has been created using **webpack-cli**, you can now run
 
-```
-npm run build
-```
+npm run dev
+
+to bundle your application and serve with live updates
+need to install nodemon globally
 
 or
 
-```
-yarn build
-```
-
-to bundle your application
+npm run build
+node run server

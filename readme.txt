@@ -104,3 +104,8 @@ npm install --save prop-types
 
 for api calls
 npm install axios --save
+
+npm install redux --save
+npm install react-redux --save
+
+npm install uuid --save

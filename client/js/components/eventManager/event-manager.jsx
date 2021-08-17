@@ -5,10 +5,11 @@ import { withStyles } from '@material-ui/styles';
 import classNames from "classnames/bind";
 import PropTypes from "prop-types";
 import moment from "moment";
-import {cloneDeep, isEqual} from 'lodash';
+import {cloneDeep} from 'lodash';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import axios from "axios";
+import {connect } from 'react-redux';
 var cx = classNames.bind(styles);
 const themeStyles = () => ({
 })
@@ -17,33 +18,39 @@ class EventManagerNoWrap extends Component {
         super(props);
         this.state = {
             eventName: this.props.eventName || "",
-            currentDate: moment().format("YYYY-MM-DDT00:00"),
-            startDate: this.props.startDate || moment().format("YYYY-MM-DDT00:00"),
-            endDate: this.props.endDate || moment().format("YYYY-MM-DDT00:00"),
-            tickets: this.props.tickets || []
+            startDate: moment().format("YYYY-MM-DDT00:00"),
+            endDate: moment().format("YYYY-MM-DDT00:00"),
+            tickets: []
         }
         this.emptyTicket={type:"",price: 0, maxCount:0, sold:0};
     }
     componentDidMount(){
-        let tempTickets = cloneDeep(this.props.tickets);
-        if(tempTickets && tempTickets.length){
-            tempTickets.push(this.emptyTicket)
-        } else{
-            tempTickets= [this.emptyTicket];
-        }
-        this.setState({tickets: tempTickets});
-
+        if (this.props.eventName) {
+            this.getEvent();
+        }  
     }
-
     static getDerivedStateFromProps(nextProps, prevState) {
         const update={};
-        if( nextProps.tickets && nextProps.tickets.length && !isEqual(nextProps.tickets, prevState.tickets)){
-            let tempTickets = cloneDeep(nextProps.tickets);
-            tempTickets.push(this.emptyTicket);
-            update.tickets= tempTickets ;
+        if((nextProps.eventName !== prevState.eventName)) {
+            update.eventName = nextProps.eventName;
         }
         return Object.keys(update).length ? update: null;
     }
+    componentDidUpdate(prevProps) {
+        if (this.props.eventName !== prevProps.eventName) {
+            this.getEvent();
+        }
+      }
+      getEvent = () =>{
+        axios({
+            method: "GET",
+            url:`/events/getEvent/?eventName=${this.props.eventName}`,
+        }).then((response)=>{
+            this.setState({startDate: response.data.startDate, endDate: response.data.endDate, tickets: response.data.tickets});
+        }).catch((error)=> {
+            console.log(error);
+        })
+      }
     
     handleEventChanged = (event) => {
         this.setState({ eventName: event.target.value })
@@ -115,7 +122,7 @@ class EventManagerNoWrap extends Component {
                                     id="startDate"
                                     label="start"
                                     type="datetime-local"
-                                    value={this.state.startDate}
+                                    value={this.state.startDate.substring(0,16)}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -128,7 +135,7 @@ class EventManagerNoWrap extends Component {
                                     id="endDate"
                                     label="end"
                                     type="datetime-local"
-                                    value={this.state.endDate}
+                                    value={this.state.endDate.substring(0,16)}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -177,4 +184,10 @@ EventManagerNoWrap.propTypes = {
     tickets: PropTypes.array,
     classNames: PropTypes.any
 }
-export const EventManager = withStyles(themeStyles)(EventManagerNoWrap);
+const mapStateToProps = state => {
+    return {
+        eventName: state.eventName
+    };
+  };
+export const EventManager =withStyles(themeStyles)((connect(mapStateToProps, null)(EventManagerNoWrap)));
+

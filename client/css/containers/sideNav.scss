@@ -1,4 +1,13 @@
 .sideNav{
+    min-height: 100vh;
+    padding: 20px;
+    border: 1px solid grey;
+    ul{
+        list-style-type: none;
+    }
+    li{
+        cursor: pointer;
+    }
     .noMargin{
         margin: 0px;
     }

@@ -7,20 +7,32 @@ import {EventManager} from "components/EventManager/event-manager";
 import {TicketManager} from "components/TicketManager/ticket-manager";
 import {ManageOptionsTab} from "components/manage-options";
 import {Home} from "components/home/home";
-export class AppLayout extends Component{
+import {connect } from 'react-redux';
+import PropTypes from "prop-types";
+import { v1 as uuidv1 } from 'uuid';
+class AppLayoutNoWrap extends Component{
+    constructor(props) {
+        super(props);
+        this.state={
+            eventName: ""
+        }
+    }
+    onHandleEventSelect=(eventName)=>{
+       this.props.onEventSelected(eventName)
+    }
 render(){
     return(
         <div>
             <AppHeader/>
-            <Grid container>
-                <Grid item xs={3}>
-                <SideNav></SideNav>
+            <Grid container style={{minHeight: "100vh"}}>
+                <Grid item xs={3} >
+                <SideNav handleEventSelect={this.onHandleEventSelect}></SideNav>
                 </Grid>
                 <Grid item xs={9}>
                 <ManageOptionsTab/>
                 <Switch>
-                <Route path="/ticketManager" component={TicketManager}></Route>
-                <Route path="/eventManager" component={EventManager}></Route>
+                <Route path="/ticketManager" ><TicketManager key={uuidv1()}/></Route>
+                <Route path="/eventManager" ><EventManager key={uuidv1()}/></Route>
                 <Route exact path="/" component={Home} />
                 </Switch>
                 </Grid>
@@ -29,3 +41,12 @@ render(){
     )
 }
 }
+function mapDispatchToProps(dispatch) {
+    return {
+        onEventSelected: (eventName) => dispatch({type: 'EVENT_SELECTED', value: eventName})
+    }
+}
+AppLayoutNoWrap.propTypes = {
+    onEventSelected: PropTypes.func
+}
+export const AppLayout = connect(null, mapDispatchToProps)(AppLayoutNoWrap);

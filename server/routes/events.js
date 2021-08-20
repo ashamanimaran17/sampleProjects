@@ -17,7 +17,6 @@ router.route('/getEvent').get((req, res)=> {
 })
 
 router.route('/add').post((req, res)=> {
-    //const newTicketEvent = new TicketEvent(req.body);
     TicketEvent.findOneAndUpdate({'eventName': req.body.eventName}, req.body, {upsert: true})
     .then(( )=> {
     res.json('Event added')}
@@ -26,4 +25,3 @@ router.route('/add').post((req, res)=> {
     });
 })
 module.exports = router;
-//    newTicketEvent.save()

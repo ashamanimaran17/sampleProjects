@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import axios from "axios";
 import {connect } from 'react-redux';
 import { Grid, Button, Typography, Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
+import {CustomCarousel} from "components/ticketManager/custom-carousel.jsx"
 import styles from 'css/components/ticketManager.scss';
 import classNames from "classnames/bind";
 import {isEmpty} from "lodash";
@@ -62,7 +63,7 @@ class TicketManagerNoWrap extends Component {
         return (
                 <Fragment>
                     {
-                    isEmpty(this.state.event) ? null : 
+                    isEmpty(this.state.event) ? <CustomCarousel/> : 
                     <Fragment>
                     <Grid container direction="column" spacing={2} className={cx("outerContainer")}>
                         <Grid item>
@@ -90,7 +91,7 @@ class TicketManagerNoWrap extends Component {
                                     <Card className={cx("ticketCard")}>
                                         <CardHeader title={ticket.type}/>
                                         <CardContent>
-                                            <Typography>Price: {ticket.price}</Typography>
+                                            <Typography>Price: ${ticket.price}</Typography>
                                             <Typography >Available: {ticket.maxCount - ticket.sold}</Typography>
                                         </CardContent>
                                         <CardActions>
@@ -116,17 +117,5 @@ const mapStateToProps = state => {
 TicketManagerNoWrap.propTypes = {
     eventName: PropTypes.string
 }
-//export const  TicketManager = connect(mapStateToProps, null)(TicketManagerNoWrap);
+
 export const TicketManager = connect(mapStateToProps)(withStyles(themeStyles)(TicketManagerNoWrap));
-{/* <Grid container direction="column" spacing={2} key={index}>
-<Grid item>
-    <Grid container direction="row" spacing={2} alignItems="center">
-        <Grid item xs={1}><Typography variant="subtitle1">Type:</Typography></Grid>
-        <Grid item xs={2}><Typography variant="subtitle1">{ticket.type}</Typography></Grid>
-        <Grid item xs={1}><Typography variant="subtitle1">Price:</Typography></Grid>
-        <Grid item xs={1}><Typography variant="subtitle1">{ticket.price}</Typography></Grid>
-        <Grid item xs={2}><Typography variant="subtitle1">Available Count:</Typography></Grid>
-        <Grid item xs={1}><Typography variant="subtitle1">{ticket.maxCount-ticket.sold}</Typography></Grid>
-      </Grid>
-</Grid>
-</Grid> */}

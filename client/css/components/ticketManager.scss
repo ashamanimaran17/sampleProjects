@@ -8,3 +8,9 @@
 .ticketCard{
     background-image: linear-gradient(to right top, #c1a381, #c0a780, #bfaa80, #bdae80, #bab281);
 }
+.customCarousel{
+    .carousel-item{
+        transition: transform 2s ease-in-out;
+    }
+}
+

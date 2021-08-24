@@ -37,7 +37,7 @@ render(){
                 <Switch>
                 <Route path="/ticketManager" ><TicketManager key={uuidv1()}/></Route>
                 <Route path="/eventManager" ><EventManager key={uuidv1()} handleDataUpdate={this.onHandleDataUpdate}/></Route>
-                <Route exact path="/" component={Home} />
+                <Route path="/" component={Home} />   
                 </Switch>
                 </Grid>
             </Grid>

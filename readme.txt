@@ -64,7 +64,7 @@ In index.js
 import "typeface-roboto";
 
 to build both fronend and backend simultaneously
-"dev": "concurrently  \"npm run serve\" \"npm run start\"" add a script called dev in package.json
+"dev": "concurrently  \"npm run watch\" \"npm run start\"" add a script called dev in package.json
 in terminal npm run-script dev
 
 mongodb atlas cn be accessed in https://cloud.mongodb.com/
@@ -109,3 +109,9 @@ npm install redux --save
 npm install react-redux --save
 
 npm install uuid --save
+
+
+kill $(lsof -t -i:3000)
+lsof -t -i:3000  -show only process id of a process running in port 3000
+
+npm install react-bootstrap --save

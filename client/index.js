@@ -8,6 +8,7 @@ import {AppLayout} from "containers/appLayout/app-layout";
 import { BrowserRouter} from 'react-router-dom';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const eventReducer = function (state = 0, action) {
     let temp={};

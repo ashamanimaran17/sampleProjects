@@ -9,7 +9,7 @@ var appRoot = process.env.PWD;
 const port= 
 process.env.PORT || 3000;
 const uri= process.env.ATLAS_URI;
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true});//no _id field for now
 const connection= mongoose.connection;
 connection.once('open', ()=> {
     console.log("MongoDB connection established");
@@ -20,13 +20,16 @@ connection.once('open', ()=> {
 }); */
 //react
 app.use(express.static(path.join(appRoot, "dist")));
-app.use(express.static('public'))
+//app.use(express.static('public'))
 
 //server will be sending and receiving json
 app.use(express.json());
 
 const eventsRouter = require("./routes/events");
 app.use('/events', eventsRouter);
+app.get('*', function (req, res) {
+    res.redirect("/");
+})
 
 app.listen(3000, ()=> {
     console.log(`server started at ${port}`);
